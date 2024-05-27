@@ -2,64 +2,89 @@
 
 {% block body %}
 
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-{% for message in messages %}
-    <p>{{ message }}</p>
-{% endfor %}
-{% endif %}
-{% endwith %}
+<div class="row">
+    <div class="col-md-5">
+    {% with messages = get_flashed_messages() %}
 
-<form action="/add_asignatura", method="POST">
+    {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
 
-    <input type="text" name="claveAsignatura" placeholder="Clave">
-    <input type="text" name="nombreAsignatura" placeholder="Asignatura">
-    <input type="text" name="grupo" placeholder="Grupo">
-    <input type="text" name="profesor" placeholder="Profesor">
-    <input type="text" name="salon" placeholder="Salon">
-    <input type="text" name="dia" placeholder="Día">
-    <input type="text" name="hora" placeholder="Hora">
-    <input type="text" name="lugaresDisponibles" placeholder="Lugares Disponibles">
+        <div class="card card-body">
+            <form action="/add_asignatura", method="POST">
+                <div class="form-group">
+                    <input type="text" name="claveAsignatura" placeholder="Clave" class ="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="nombreAsignatura" placeholder="Asignatura" class ="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="grupo" placeholder="Grupo" class ="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="profesor" placeholder="Profesor" class ="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="salon" placeholder="Salon" class ="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="dia" placeholder="Día" class ="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="hora" placeholder="Hora" class ="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="lugaresDisponibles" placeholder="Lugares Disponibles" class ="form-control">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                </div>
 
-    <button type="submit">Guardar</button>
-
-</form>
-
-    <table>
-        <thread> 
+            </form>
+        </div>
+    </div>
+    <div class="col-md-7 pt-4">
+        <table class = "table table-striped table-bordered bg-white table-sm">
+            <thread> 
+                <tr>
+                    <td>Clave</td>
+                    <td>Nombre</td>
+                    <td>Grupo</td>
+                    <td>Profesor</td>
+                    <td>Salon</td>
+                    <td>Dia</td>
+                    <td>Hora</td>
+                    <td>Lugares Disponibles</td>
+                    <td>Acciones</td>
+                </tr>
+            </thread>
+    
+            <tbody>
+            {% for asignatura in asignaturas %}
             <tr>
-                <td>Clave</td>
-                <td>Nombre</td>
-                <td>Grupo</td>
-                <td>Profesor</td>
-                <td>Salon</td>
-                <td>Dia</td>
-                <td>Hora</td>
-                <td>Lugares Disponibles</td>
-                <td>Acciones</td>
+                <td>{{ asignatura.1 }}</td>
+                <td>{{ asignatura.2 }}</td>
+                <td>{{ asignatura.3 }}</td>
+                <td>{{ asignatura.4 }}</td>
+                <td>{{ asignatura.5 }}</td>
+                <td>{{ asignatura.6 }}</td>
+                <td>{{ asignatura.7 }}</td>
+                <td>{{ asignatura.8 }}</td>
+                <td>
+                    <a href="/edit/{{ asignatura.0 }}" class = "btn btn-secondary">Editar</a>
+                    <a href="/delete/{{ asignatura.0 }}" class = "btn btn-danger">Eliminar</a>
+                </td>
             </tr>
-        </thread>
-
-        <tbody>
-        {% for asignatura in asignaturas %}
-        <tr>
-            <td>{{ asignatura.1 }}</td>
-            <td>{{ asignatura.2 }}</td>
-            <td>{{ asignatura.3 }}</td>
-            <td>{{ asignatura.4 }}</td>
-            <td>{{ asignatura.5 }}</td>
-            <td>{{ asignatura.6 }}</td>
-            <td>{{ asignatura.7 }}</td>
-            <td>{{ asignatura.8 }}</td>
-            <td>
-                <a href="/edit/{{ asignatura.0 }}">Editar</a>
-                <a href="/delete/{{ asignatura.0 }}">Eliminar</a>
-            </td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-</form>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
 {% endblock %}

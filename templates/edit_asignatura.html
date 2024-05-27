@@ -1,14 +1,40 @@
-<form action="/update/{{asignatura.0}}", method="POST">
+{% extends 'layout.html' %}
 
-    <input type="text" name="claveAsignatura" placeholder="Clave" value="{{asignatura.1}}">
-    <input type="text" name="nombreAsignatura" placeholder="Asignatura" value="{{asignatura.2}}">
-    <input type="text" name="grupo" placeholder="Grupo" value="{{asignatura.3}}">
-    <input type="text" name="profesor" placeholder="Profesor" value="{{asignatura.4}}">
-    <input type="text" name="salon" placeholder="Salon" value="{{asignatura.5}}">
-    <input type="text" name="dia" placeholder="Día" value="{{asignatura.6}}">
-    <input type="text" name="hora" placeholder="Hora" value="{{asignatura.7}}">
-    <input type="text" name="lugaresDisponibles" placeholder="Lugares Disponibles" value="{{asignatura.8}}">
+{% block body %}
+    <div class="col-md-4 offset-md-4">
+        <div class="card card-body">
+            <form action="/update/{{asignatura.0}}", method="POST">
 
-    <button type="submit">Guardar</button>
+                <div class="form-group">
+                    <input type="text" name="claveAsignatura" placeholder="Clave" value="{{asignatura.1}}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="nombreAsignatura" placeholder="Asignatura" value="{{asignatura.2}}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="grupo" placeholder="Grupo" value="{{asignatura.3}}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="profesor" placeholder="Profesor" value="{{asignatura.4}}" class="form-control"> 
+                </div>
+                <div class="form-group">
+                    <input type="text" name="salon" placeholder="Salon" value="{{asignatura.5}}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="dia" placeholder="Día" value="{{asignatura.6}}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="hora" placeholder="Hora" value="{{asignatura.7}}" class="form-control">
+                </div>
+                <div class="form-group"></div>
+                    <input type="text" name="lugaresDisponibles" placeholder="Lugares Disponibles" value="{{asignatura.8}}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-block">Guardar</button>
+                </div>
+                    
+            </form>
+        </div>
+    </div>
 
-</form>
+{% endblock %}
