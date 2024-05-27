@@ -41,7 +41,7 @@ def add_asignatura():
         flash('Asignatura agregada correctamente')    
         return redirect(url_for('index'))
 
-#METODO 
+#METODO GET
 @app.route('/edit/<id>')
 def get_asignatura(id):
     cursor = mysql.connection.cursor()
@@ -49,7 +49,7 @@ def get_asignatura(id):
     data = cursor.fetchall()
     return render_template('edit_asignatura.html', asignatura = data[0])
 
-#UPDATE
+#METODO POST
 @app.route('/update/<id>', methods=['POST'])
 def update_asignatura(id):
     if request.method == 'POST':
@@ -66,12 +66,11 @@ def update_asignatura(id):
                 UPDATE asignaturas
                 SET claveAsignatura = %s, nombreAsignatura = %s, grupo = %s, profesor = %s, salon = %s, dia = %s, hora = %s, lugaresDisponibles = %s WHERE id = %s
                     """, (claveAsignatura, nombreAsignatura, grupo, profesor, salon, dia, hora, lugaresDisponibles, id))
-        mysql.connection.commit()
         flash('Asignatura actualizada correctamente')
         return redirect(url_for('index'))
 
 #METODO DELETE
-@app.route('/delete/<string:id>', methods = ['DELETE'])
+@app.route('/delete/<string:id>')
 def delete_asignatura(id):
     cursor = mysql.connection.cursor()
     cursor.execute("DELETE FROM asignaturas WHERE id = {0}".format(id))
