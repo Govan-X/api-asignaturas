@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<form action="/add_asignatura", method="POST">
+
+    <input type="text" name="claveAsignatura" placeholder="Clave">
+    <input type="text" name="nombreAsignatura" placeholder="Asignatura">
+    <input type="text" name="grupo" placeholder="Grupo">
+    <input type="text" name="profesor" placeholder="Profesor">
+    <input type="text" name="salon" placeholder="Salon">
+    <input type="text" name="dia" placeholder="Día">
+    <input type="text" name="hora" placeholder="Hora">
+    <input type="text" name="lugaresDisponibles" placeholder="Lugares Disponibles">
+
+    <button type="submit">Guardar</button>
+
+</form>
+
+    <table>
+        <thread> 
+            <tr>
+                <td>Clave</td>
+                <td>Nombre</td>
+                <td>Grupo</td>
+                <td>Profesor</td>
+                <td>Salon</td>
+                <td>Dia</td>
+                <td>Hora</td>
+                <td>Lugares Disponibles</td>
+                <td>Acciones</td>
+            </tr>
+        </thread>
+
+        <tbody>
+        {% for asignatura in asignaturas %}
+        <tr>
+            <td>{{ asignatura.1 }}</td>
+            <td>{{ asignatura.2 }}</td>
+            <td>{{ asignatura.3 }}</td>
+            <td>{{ asignatura.4 }}</td>
+            <td>{{ asignatura.5 }}</td>
+            <td>{{ asignatura.6 }}</td>
+            <td>{{ asignatura.7 }}</td>
+            <td>{{ asignatura.8 }}</td>
+            <td>
+                <a href="/edit/{{ asignatura.0 }}">Editar</a>
+                <a href="/delete/{{ asignatura.0 }}">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</form>
+
+{% endblock %}
